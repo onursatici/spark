@@ -542,6 +542,12 @@ private[spark] class SparkSubmit extends Logging {
       OptionAssigner(args.principal, YARN, ALL_DEPLOY_MODES, confKey = "spark.yarn.principal"),
       OptionAssigner(args.keytab, YARN, ALL_DEPLOY_MODES, confKey = "spark.yarn.keytab"),
 
+      // K8S only
+      OptionAssigner(args.driverPodSpec, KUBERNETES, ALL_DEPLOY_MODES,
+        confKey = "spark.kubernetes.driver.podSpec"),
+      OptionAssigner(args.executorPodSpec, KUBERNETES, ALL_DEPLOY_MODES,
+        confKey = "spark.kubernetes.executor.podSpec"),
+
       // Other options
       OptionAssigner(args.executorCores, STANDALONE | YARN | KUBERNETES, ALL_DEPLOY_MODES,
         confKey = "spark.executor.cores"),

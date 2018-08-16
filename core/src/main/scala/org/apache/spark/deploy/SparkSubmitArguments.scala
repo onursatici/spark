@@ -75,6 +75,8 @@ private[deploy] class SparkSubmitArguments(args: Seq[String], env: Map[String, S
   var proxyUser: String = null
   var principal: String = null
   var keytab: String = null
+  var driverPodSpec: String = null
+  var executorPodSpec: String = null
   private var dynamicAllocationEnabled: Boolean = false
 
   // Standalone cluster mode only
@@ -457,6 +459,12 @@ private[deploy] class SparkSubmitArguments(args: Seq[String], env: Map[String, S
       case KEYTAB =>
         keytab = value
 
+      case DRIVER_POD_SPEC =>
+        driverPodSpec = value
+
+      case EXECUTOR_POD_SPEC =>
+        executorPodSpec = value
+
       case HELP =>
         printUsageAndExit(0)
 
@@ -591,6 +599,10 @@ private[deploy] class SparkSubmitArguments(args: Seq[String], env: Map[String, S
         |                              the node running the Application Master via the Secure
         |                              Distributed Cache, for renewing the login tickets and the
         |                              delegation tokens periodically.
+        |
+        |  K8S-only:
+        |  --driver-pod-spec           Pod spec file to be used in creating the driver
+        |  --executor-pod-spec         Pod spec file to be used in creating executors
       """.stripMargin
     )
 

@@ -76,6 +76,11 @@ class SparkSubmitOptionParser {
   protected final String PRINCIPAL = "--principal";
   protected final String QUEUE = "--queue";
 
+
+  // K8S-only options.
+  protected final String DRIVER_POD_SPEC = "--driver-pod-spec-file";
+  protected final String EXECUTOR_POD_SPEC = "--executor-pod-spec-file";
+
   /**
    * This is the canonical list of spark-submit options. Each entry in the array contains the
    * different aliases for the same option; the first element of each entry is the "official"
@@ -115,6 +120,8 @@ class SparkSubmitOptionParser {
     { REPOSITORIES },
     { STATUS },
     { TOTAL_EXECUTOR_CORES },
+    { DRIVER_POD_SPEC },
+    { EXECUTOR_POD_SPEC }
   };
 
   /**
